@@ -1,0 +1,43 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build FirstApp
+        if: ${{ github.event_path == 'FirstApp' || github.event_path == 'Modules' }}
+        run: |
+          cd FirstApp
+          docker build -t ghcr.io/mallikharjun999/first-app .
+
+      - name: Build SecondApp
+        if: ${{ github.event_path == 'SecondApp' || github.event_path == 'Modules' }}
+        run: |
+          cd SecondApp
+          docker build -t ghcr.io/mallikharjun999/second-app .
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.mallikharjun999 }}
+          password: ${{ secrets.MY_TOKEN }}
+
+      - name: Push FirstApp image to GitHub Container Registry
+        if: ${{ github.event_path == 'FirstApp' || github.event_path == 'Modules' }}
+        run: |
+          docker push ghcr.io/mallikharjun999/first-app
+
+      - name: Push SecondApp image to GitHub Container Registry
+        if: ${{ github.event_path == 'SecondApp' || github.event_path == 'Modules' }}
+        run: |
+          docker push ghcr.io/mallikharjun999/second-app
