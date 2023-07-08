@@ -17,13 +17,13 @@ jobs:
         if: ${{ github.event_path == 'FirstApp' || github.event_path == 'Modules' }}
         run: |
           cd FirstApp
-          docker build -t ghcr.io/mallikharjun999/first-app .
+          docker build -t ghcr.io/mallikharjun999/assesment:latest/first-app .
 
       - name: Build SecondApp
         if: ${{ github.event_path == 'SecondApp' || github.event_path == 'Modules' }}
         run: |
           cd SecondApp
-          docker build -t ghcr.io/mallikharjun999/second-app .
+          docker build -t ghcr.io/mallikharjun999/assesment:latest/second-app .
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
@@ -35,9 +35,9 @@ jobs:
       - name: Push FirstApp image to GitHub Container Registry
         if: ${{ github.event_path == 'FirstApp' || github.event_path == 'Modules' }}
         run: |
-          docker push ghcr.io/mallikharjun999/first-app
+          docker push ghcr.io/mallikharjun999/assesment:latest/first-app
 
       - name: Push SecondApp image to GitHub Container Registry
         if: ${{ github.event_path == 'SecondApp' || github.event_path == 'Modules' }}
         run: |
-          docker push ghcr.io/mallikharjun999/second-app
+          docker push ghcr.io/mallikharjun999/assesment:latest/second-app
