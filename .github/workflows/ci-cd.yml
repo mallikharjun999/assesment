@@ -30,6 +30,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ secrets.mallikharjun999 }}
+          password: ${{ secrets.Malli@199703 }}
           password: ${{ secrets.MY_TOKEN }}
 
       - name: Push FirstApp image to GitHub Container Registry
