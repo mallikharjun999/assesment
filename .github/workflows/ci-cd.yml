@@ -30,7 +30,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ secrets.mallikharjun999 }}
-          password: ${{ secrets.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 }}
+          password: ${{ secrets.ghp_MY_TOKEN }}
 
       - name: Push FirstApp image to GitHub Container Registry
         if: ${{ github.event_path == 'FirstApp' || github.event_path == 'Modules' }}
